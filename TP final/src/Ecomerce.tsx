@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const elementos = [
   {
     id: 1,
@@ -57,13 +59,16 @@ const elementos = [
 ]
 
 function App() {
+  const [valor, setValor] = useState("")
   return (
     <main>
    <header>
       <h1>Ecomerce</h1>
+      <p>Bienvenido a nuestro e-commerce</p>
+      <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
     </header>
 
-      {elementos.map((elemento) => (
+      {elementos.filter((elemento) => elemento.nombre.toLowerCase().includes(valor.toLowerCase())).map((elemento) => (
         <div className="tarjeta" key={elemento.id}>
           {elemento.nombre}, {elemento.precio}, {elemento.tipo}
         </div>
