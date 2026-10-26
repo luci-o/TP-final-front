@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 const elementos = [
   {
     id: 1,
@@ -61,7 +62,7 @@ const elementos = [
 function App() {
   const [valor, setValor] = useState("")
   return (
-    <main>
+    <div>
    <header>
       <h1>Ecomerce</h1>
       <p>Bienvenido a nuestro e-commerce</p>
@@ -73,7 +74,7 @@ function App() {
           {elemento.nombre}, {elemento.precio}, {elemento.tipo}
         </div>
       ))}
-    </main>
+    </div>
   )
 }
 
