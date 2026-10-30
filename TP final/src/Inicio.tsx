@@ -12,9 +12,20 @@ function inicio(){
    <h1>Bienvenido</h1>
    <h3>Inicia sesión para continuar</h3>
  </header>
-  <input type="Usuario"  placeholder="Usuario" />
-  <input type="Contraseña"  placeholder="Contraseña"/>
-  <button onClick={() => setIrAEcomerce(true)}>Continuar</button>
+  <input id="usuario" type="Text"  placeholder="Usuario" />
+  <input id="contraseña" type="Password"  placeholder="Contraseña"/>
+  <button onClick={() => {
+    const valUsuario = document.getElementById("usuario").value;
+    const valContraseña = document.getElementById("contraseña").value;
+    
+  if (valUsuario === '' || valContraseña === '') {
+    setIrAEcomerce(false);
+} else {
+    setIrAEcomerce(true);
+  }
+}}>
+  Continuar
+</button>
  </div>
   );
 }
