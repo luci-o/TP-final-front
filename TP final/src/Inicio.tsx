@@ -2,9 +2,9 @@ import { useState } from 'react'
 import Ecomerce from './Ecomerce'
 function inicio(){
   const [irAEcomerce, setIrAEcomerce] = useState(false)
-
+  const [usuario, setUsuario] = useState(false)
   if (irAEcomerce) {
-    return <Ecomerce />
+    return <Ecomerce nombreUsuario={usuario} />
   }
   return(
     <div>
@@ -21,6 +21,7 @@ function inicio(){
   if (valUsuario === '' || valContraseña === '') {
     setIrAEcomerce(false);
 } else {
+  setUsuario(valUsuario);
     setIrAEcomerce(true);
   }
 }}>

@@ -69,13 +69,13 @@ const elementos = [
 
 ]
 
-function App() {
+function App({ nombreUsuario }) {
   const [valor, setValor] = useState("")
   return (
     <div>
    <header>
       <h1>Ecomerce</h1>
-      <p>Bienvenido a nuestro e-commerce, [nombre usuario]</p>
+      <p>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
       <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
     </header>
 
