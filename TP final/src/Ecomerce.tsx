@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { useEcomerce } from './hooks/useEcomerce'
 
 const elementos = [
   {
@@ -71,18 +71,30 @@ const elementos = [
 
 function App({ nombreUsuario }) {
   const [valor, setValor] = useState("")
+  const { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito } = useEcomerce()
+  
   return (
     <div>
    <header>
       <h1>Ecomerce</h1>
       <p>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
       <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
+      <p>Carrito: {carrito.length}</p>
     </header>
 
       {elementos.filter((elemento) => elemento.nombre.toLowerCase().includes(valor.toLowerCase())).map((elemento) => (
         <div className="tarjeta" key={elemento.id}>
-          {elemento.nombre}, {elemento.precio}, {elemento.tipo},{elemento.boton}
-        </div>
+          {elemento.nombre}, {elemento.precio}, {elemento.tipo},
+<button
+  onClick={() =>
+    estaEnCarrito(elemento.id)
+      ? eliminarDelCarrito(elemento.id)
+      : agregarAlCarrito(elemento)
+  }
+>
+  {estaEnCarrito(elemento.id) ? "Sacar del carrito" : "Agregar al carrito"}
+</button>
+      </div>
       ))}
     </div>
   )

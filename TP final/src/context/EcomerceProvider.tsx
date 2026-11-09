@@ -1,5 +1,5 @@
-import { useState, ReactNode } from 'react'
-import { EcomerceContext, Producto } from './EcomerceContext'
+import { useState, type ReactNode } from 'react'
+import { EcomerceContext, type Producto } from './EcomerceContext'
 
 interface EcomerceProviderProps {
   children: ReactNode

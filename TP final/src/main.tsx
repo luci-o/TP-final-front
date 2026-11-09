@@ -1,10 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Login from './Inicio.tsx' // <-- Debe llevar './' al inicio
+import Login from './Inicio.tsx'
+import { EcomerceProvider } from './context/EcomerceProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Login />
+    <EcomerceProvider>
+      <Login />
+    </EcomerceProvider>
   </StrictMode>,
 )
