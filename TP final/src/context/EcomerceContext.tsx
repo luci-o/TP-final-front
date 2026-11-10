@@ -5,6 +5,7 @@ export interface Producto {
   nombre: string
   precio: string
   tipo: string
+  imagen: string
 }
 
 export interface EcomerceContextType {
