@@ -1,29 +1,10 @@
-import { useState } from 'react'
-
-export interface Producto {
-  id: number
-  nombre: string
-  precio: string
-  tipo: string
-  imagen: string
-}
+import { useContext } from 'react'
+import { EcomerceContext } from '../context/EcomerceContext'
 
 export function useEcomerce() {
-  const [carrito, setCarrito] = useState<Producto[]>([])
-
-  const estaEnCarrito = (id: number) => {
-    return carrito.some((item) => item.id === id)
+  const context = useContext(EcomerceContext)
+  if (context === undefined) {
+    throw new Error('useEcomerce debe usarse dentro de un EcomerceProvider')
   }
-
-  const agregarAlCarrito = (producto: Producto) => {
-    if (!estaEnCarrito(producto.id)) {
-      setCarrito((prev) => [...prev, producto])
-    }
-  }
-
-  const eliminarDelCarrito = (id: number) => {
-    setCarrito((prev) => prev.filter((item) => item.id !== id))
-  }
-
-  return { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito }
+  return context
 }
