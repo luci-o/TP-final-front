@@ -78,7 +78,7 @@ const elementos = [
 
 ]
 
-function App({ nombreUsuario }) {
+function App({ nombreUsuario }: { nombreUsuario: string }) {
   const [valor, setValor] = useState("")
   const { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito } = useEcomerce()
   
