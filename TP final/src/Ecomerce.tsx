@@ -86,7 +86,7 @@ function App({ nombreUsuario }) {
     <div>
    <header>
       <h1>Ecomerce</h1>
-      <p>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
+      <p style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
       <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
       <p>Carrito: {carrito.length}</p>
     </header>
