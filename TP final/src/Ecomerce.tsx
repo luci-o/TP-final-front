@@ -84,13 +84,23 @@ function App({ nombreUsuario }) {
   const [valor, setValor] = useState("")
    const [pantalla, setPantalla] = useState<"productos" | "carrito" | "noCarrito">("productos")
   const { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito } = useEcomerce()
-    if (pantalla === "carrito") {
-    return <EcomerceCarrito />
-  }
+  if (pantalla === "carrito") {
+  return (
+    <EcomerceCarrito
+      onVerTodo={() => setPantalla("productos")}
+      onVerNoCarrito={() => setPantalla("noCarrito")}
+    />
+  )
+}
 
-  if (pantalla === "noCarrito") {
-    return <EcomerceNoCarrito />
-  }
+if (pantalla === "noCarrito") {
+  return (
+    <EcomerceNoCarrito
+      onVerTodo={() => setPantalla("productos")}
+      onVerCarrito={() => setPantalla("carrito")}
+    />
+  )
+}
   return (
     <div>
    <header>
