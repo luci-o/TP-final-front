@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useEcomerce } from './hooks/useEcomerce'
 import './Ecomerce.css'
+import EcomerceCarrito from './EcomerceCarrito'
+import EcomerceNoCarrito from './EcomerceNoCarrito'
 import compuImage from './assets/Compu.jpeg'
 import cortinaImage from './assets/Cortina.jpeg'
 import lamparaImage from './assets/Lámpara.jpeg'
@@ -80,8 +82,15 @@ const elementos = [
 
 function App({ nombreUsuario }) {
   const [valor, setValor] = useState("")
+   const [pantalla, setPantalla] = useState<"productos" | "carrito" | "noCarrito">("productos")
   const { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito } = useEcomerce()
-  
+    if (pantalla === "carrito") {
+    return <EcomerceCarrito />
+  }
+
+  if (pantalla === "noCarrito") {
+    return <EcomerceNoCarrito />
+  }
   return (
     <div>
    <header>
@@ -89,6 +98,8 @@ function App({ nombreUsuario }) {
       <p style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
       <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
       <p>Carrito: {carrito.length}</p>
+       <button onClick={() => setPantalla("carrito")}>Ver carrito</button>
+        <button onClick={() => setPantalla("noCarrito")}>No carrito</button>
     </header>
 
       <main className="productos">
