@@ -96,11 +96,13 @@ function App({ nombreUsuario }) {
 if (pantalla === "noCarrito") {
   return (
     <EcomerceNoCarrito
+      elementos={elementos}
       onVerTodo={() => setPantalla("productos")}
       onVerCarrito={() => setPantalla("carrito")}
     />
   )
 }
+
   return (
     <div>
    <header>
