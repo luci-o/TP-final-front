@@ -21,7 +21,7 @@ function EcomerceCarrito({ onVerTodo, onVerNoCarrito }: Props) {
       <header>
         <h1>Carrito:{carrito.length}</h1>
         <button onClick={onVerTodo}>Ver todo</button>
-        <button onClick={onVerNoCarrito}>Ver producto no en carrito</button>
+        <button onClick={onVerNoCarrito}>No carrito</button>
       </header>
 
       <main className="productos">
