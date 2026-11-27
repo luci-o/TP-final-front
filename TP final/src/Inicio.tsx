@@ -67,7 +67,6 @@ function inicio(){
       fontSize: '16px',
       fontWeight: 'bold',
       cursor: 'pointer'
-  
     }
   };
 
@@ -83,6 +82,8 @@ function inicio(){
           id="usuario" 
           type="Text" 
           placeholder="Usuario" 
+          value={}
+          onChange={}
           style={estilos.input} 
         />
         
