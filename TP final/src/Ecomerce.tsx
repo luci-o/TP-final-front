@@ -77,60 +77,128 @@ const elementos = [
     tipo: "Hogar",
     imagen: lamparaImage,
   }
-
 ]
 
 function App({ nombreUsuario }) {
   const [valor, setValor] = useState("")
-   const [pantalla, setPantalla] = useState<"productos" | "carrito" | "noCarrito">("productos")
+  const [pantalla, setPantalla] = useState<"productos" | "carrito" | "noCarrito">("productos")
   const { carrito, agregarAlCarrito, eliminarDelCarrito, estaEnCarrito } = useEcomerce()
-  if (pantalla === "carrito") {
-  return (
-    <EcomerceCarrito
-      onVerTodo={() => setPantalla("productos")}
-      onVerNoCarrito={() => setPantalla("noCarrito")}
-    />
-  )
-}
 
-if (pantalla === "noCarrito") {
-  return (
-    <EcomerceNoCarrito
-      elementos={elementos}
-      onVerTodo={() => setPantalla("productos")}
-      onVerCarrito={() => setPantalla("carrito")}
-    />
-  )
-}
+  if (pantalla === "carrito") {
+    return (
+      <EcomerceCarrito
+        onVerTodo={() => setPantalla("productos")}
+        onVerNoCarrito={() => setPantalla("noCarrito")}
+      />
+    )
+  }
+
+  if (pantalla === "noCarrito") {
+    return (
+      <EcomerceNoCarrito
+        elementos={elementos}
+        onVerTodo={() => setPantalla("productos")}
+        onVerCarrito={() => setPantalla("carrito")}
+      />
+    )
+  }
+
+  // Estilos en línea para el rediseño sin alterar tu lógica ni tu Ecomerce.css
+  const estilos = {
+    header: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '20px',
+      textAlign: 'center'
+    },
+    titulo: {
+      margin: '0 0 10px 0'
+    },
+    bienvenida: {
+      fontSize: '2.5rem',
+      fontWeight: 'bold',
+      margin: '0 0 20px 0'
+    },
+    barraAcciones: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '12px',
+      width: '100%',
+      maxWidth: '750px',
+      flexWrap: 'wrap',
+      marginBottom: '10px'
+    },
+    buscador: {
+      flex: 1,
+      minWidth: '220px',
+      padding: '12px 18px',
+      borderRadius: '25px',
+      border: '1px solid #cccccc',
+      fontSize: '15px',
+      outline: 'none'
+    },
+    botonVerde: {
+      backgroundColor: '#2ecc71',
+      color: '#000000',
+      border: 'none',
+      borderRadius: '25px',
+      padding: '12px 20px',
+      fontSize: '15px',
+      fontWeight: 'bold',
+      cursor: 'pointer'
+    },
+    contadorCarrito: {
+      margin: '8px 0 0 0',
+      fontWeight: 'bold'
+    }
+  }
 
   return (
     <div>
-   <header>
-      <h1>Ecomerce</h1>
-      <p style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>Bienvenido a nuestro e-commerce, { nombreUsuario }</p>
-      <input type="text" placeholder="Buscar productos..." value={valor} onChange={(e) => setValor(e.target.value)} />
-      <p>Carrito: {carrito.length}</p>
-       <button onClick={() => setPantalla("carrito")}>Ver carrito</button>
-        <button onClick={() => setPantalla("noCarrito")}>No carrito</button>
-    </header>
+      <header style={estilos.header}>
+        <h1 style={estilos.titulo}>Ecomerce</h1>
+        <p style={estilos.bienvenida}>Bienvenido a nuestro e-commerce, {nombreUsuario}</p>
+        
+        <div style={estilos.barraAcciones}>
+          <input 
+            type="text" 
+            placeholder="Buscar productos..." 
+            value={valor} 
+            onChange={(e) => setValor(e.target.value)} 
+            style={estilos.buscador}
+          />
+          <button style={estilos.botonVerde} onClick={() => setPantalla("carrito")}>
+            Ver carrito
+          </button>
+          <button style={estilos.botonVerde} onClick={() => setPantalla("noCarrito")}>
+            No carrito
+          </button>
+        </div>
+
+        <p style={estilos.contadorCarrito}>Carrito: {carrito.length}</p>
+      </header>
 
       <main className="productos">
-      {elementos.filter((elemento) => elemento.nombre.toLowerCase().includes(valor.toLowerCase())).map((elemento) => (
-      <div className="tarjeta" key={elemento.id}>
-        <img src={elemento.imagen} alt={elemento.nombre} />
-        <h2>{elemento.nombre}</h2>
-        <p>{elemento.precio} · {elemento.tipo}</p>
-        <button
-          onClick={() =>
-            estaEnCarrito(elemento.id)
-              ? eliminarDelCarrito(elemento.id)
-              : agregarAlCarrito(elemento)
-          }
-        >
-          {estaEnCarrito(elemento.id) ? "Sacar del carrito" : "Agregar al carrito"}
-        </button>
-      </div>
-      ))}
+        {elementos.filter((elemento) => elemento.nombre.toLowerCase().includes(valor.toLowerCase())).map((elemento) => (
+          <div className="tarjeta" key={elemento.id}>
+            <img src={elemento.imagen} alt={elemento.nombre} />
+            <h2>{elemento.nombre}</h2>
+            <p>{elemento.precio} · {elemento.tipo}</p>
+            <button
+              style={estilos.botonVerde}
+              onClick={() =>
+                estaEnCarrito(elemento.id)
+                  ? eliminarDelCarrito(elemento.id)
+                  : agregarAlCarrito(elemento)
+              }
+            >
+              {estaEnCarrito(elemento.id) ? "Sacar del carrito" : "Agregar al carrito"}
+            </button>
+          </div>
+        ))}
       </main>
     </div>
   )
