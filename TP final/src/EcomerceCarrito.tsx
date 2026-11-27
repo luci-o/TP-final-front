@@ -16,12 +16,44 @@ function EcomerceCarrito({ onVerTodo, onVerNoCarrito }: Props) {
 
   const { carrito, eliminarDelCarrito } = context
 
+  const estilos = {
+    header: {
+      display: 'flex',
+      flexDirection: 'row' as const,
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      padding: '20px',
+      flexWrap: 'wrap' as const
+    },
+    titulo: {
+      margin: 0
+    },
+    botonesGrupo: {
+      display: 'flex',
+      flexDirection: 'row' as const,
+      gap: '12px'
+    },
+    botonVerde: {
+      backgroundColor: '#2ecc71',
+      color: '#000000',
+      border: 'none',
+      borderRadius: '25px',
+      padding: '12px 20px',
+      fontSize: '15px',
+      fontWeight: 'bold',
+      cursor: 'pointer'
+    }
+  }
+
   return (
     <div>
-      <header>
-        <h1>Carrito:{carrito.length}</h1>
-        <button onClick={onVerTodo}>Ver todo</button>
-        <button onClick={onVerNoCarrito}>No carrito</button>
+      <header style={estilos.header}>
+        <h1 style={estilos.titulo}>Carrito:{carrito.length}</h1>
+        <div style={estilos.botonesGrupo}>
+          <button style={estilos.botonVerde} onClick={onVerTodo}>Ver todo</button>
+          <button style={estilos.botonVerde} onClick={onVerNoCarrito}>No carrito</button>
+        </div>
       </header>
 
       <main className="productos">
@@ -30,7 +62,9 @@ function EcomerceCarrito({ onVerTodo, onVerNoCarrito }: Props) {
             <img src={elemento.imagen} alt={elemento.nombre} />
             <h2>{elemento.nombre}</h2>
             <p>{elemento.precio} · {elemento.tipo}</p>
-            <button onClick={() => eliminarDelCarrito(elemento.id)}>Sacar del carrito</button>
+            <button style={estilos.botonVerde} onClick={() => eliminarDelCarrito(elemento.id)}>
+              Sacar del carrito
+            </button>
           </div>
         ))}
       </main>
